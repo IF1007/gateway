@@ -1,0 +1,24 @@
+{
+  "name": "microobs-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/microobs/gateway#readme",
+  "bugs": {
+    "url": "https://github.com/microobs/gateway/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/microobs/gateway.git"
+  },
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+  }
+}
