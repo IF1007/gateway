@@ -14,10 +14,13 @@
   },
   "keywords": [],
   "scripts": {
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "prometheus-query": "^2.1.0"
   },
   "devDependencies": {
   }
