@@ -5,6 +5,7 @@ const router = require('express').Router();
     response.send('Hello World!')
 }); */
 
-router.use('/metrics', require('./metrics'))
+router.use('/metrics', require('./metrics'));
+router.use('/dimensions', require('./dimensions'));
 
 module.exports = router;
