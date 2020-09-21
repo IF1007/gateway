@@ -1,5 +1,6 @@
-const { keys, toNumber } = require('lodash');
-const PrometheusQuery = require('prometheus-query');
+const { keys, toNumber } = require('lodash'),
+  PrometheusQuery = require('prometheus-query'),
+  config = require('config');
 
 class MetricsControlller {
 
