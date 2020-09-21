@@ -5,7 +5,7 @@ class MetricsControlller {
 
   constructor() {
     this.pq = new PrometheusQuery({
-      endpoint: "http://prometheus:9090",
+      endpoint: `http://${config.get('prometheus.server')}:${config.get('prometheus.port')}`,
       baseURL: "/api/v1" // default value
     });
   }
