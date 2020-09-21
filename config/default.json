@@ -1,0 +1,12 @@
+{
+  "elastic": {
+    "server": "elasticsearch",
+    "port": "9200",
+    "health": "/_cat/health"
+  },
+  "prometheus": {
+    "server": "prometheus",
+    "port": "9090",
+    "health": "/-/healthy"
+  }
+}
