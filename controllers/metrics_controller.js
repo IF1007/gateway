@@ -1,4 +1,4 @@
-const { dropRight, keys, toNumber } = require('lodash');
+const { keys, toNumber } = require('lodash');
 const PrometheusQuery = require('prometheus-query');
 
 class MetricsControlller {
@@ -23,7 +23,7 @@ class MetricsControlller {
   getMetric(request, response, next) {
     var metric = request.params._metric;
 
-      this.pq.instantQuery(metric)
+    this.pq.instantQuery(metric)
       .then(res => {
         response.json(res.result);
       })
@@ -35,12 +35,12 @@ class MetricsControlller {
 
     this.pq.labelNames()
       .then(res => {
-        if(limit && (limit = toNumber(limit))){
+        if (limit && (limit = toNumber(limit))) {
           response.json(res.slice(0, limit));
-        }else{
+        } else {
           response.json(res);
         }
-        
+
       })
       .catch(next);
   }
@@ -49,10 +49,10 @@ class MetricsControlller {
     var dimension = request.params._dimension;
 
     this.pq.labelValues(dimension)
-    .then(res => {
-      response.json(res);
-    })
-    .catch(next);
+      .then(res => {
+        response.json(res);
+      })
+      .catch(next);
   }
 }
 
