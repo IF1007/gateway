@@ -2,7 +2,7 @@
   "elastic": {
     "server": "elasticsearch",
     "port": "9200",
-    "health": "/_cat/health"
+    "health": "/_cat/health?format=JSON"
   },
   "prometheus": {
     "server": "prometheus",

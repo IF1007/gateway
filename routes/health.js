@@ -1,7 +1,9 @@
 const router = require('express').Router(),
-  async = require('async'),
   fetch = require('node-fetch'),
   config = require('config');
+
+// loads a shim for Promise.allSettled in case isn't available
+require('promise.allsettled').shim();
 
 const createMessage = (status, name, url, message = "") =>
   ({
@@ -13,57 +15,37 @@ const createMessage = (status, name, url, message = "") =>
     }
   });
 
+const services = ['prometheus', 'elastic'].map(service => ({
+  name: service,
+  url: `http://${config.get(`${service}.server`)}:${config.get(`${service}.port`)}` +
+    `${config.get(`${service}.health`)}`
+}));
+
 router.get('/', (req, res) => {
 
-  let status = true;
+  Promise.allSettled(services.map(service => fetch(service.url)))
+    .then(results => {
+      let msg = { ok: true, checks: [] };
 
-  async.parallel([
-    function (callback) {
-      let url =
-        `http://${config.get('prometheus.server')}:${config.get('prometheus.port')}` +
-        `${config.get('prometheus.health')}`;
-
-      fetch(url)
-        .then(res => {
-          if (res.ok) {
-            callback(null, createMessage(true, 'prometheus', url));
+      results.forEach((result, index) => {
+        if (result.status == 'rejected') {
+          msg.ok = false;
+          msg.checks.push(createMessage(false, services[index].name, services[index].url, result.reason));
+        } else {
+          if (!result.value.ok) {
+            msg.ok = false;
+            msg.checks.push(createMessage(false, services[index].name, services[index].url, result.value.statusText));
           } else {
-            status = false;
-            callback(null, createMessage(false, 'prometheus', url, res.statusText));
+            msg.checks.push(createMessage(true, services[index].name, services[index].url));
           }
-        })
-        .catch(err => {
-          status = false;
-          callback(null, createMessage(false, 'prometheus', url, err.message));
-        });
-    },
-    function (callback) {
-      let url = `http://${config.get('elastic.server')}:${config.get('elastic.port')}` +
-        `${config.get('elastic.health')}?format=JSON`;
-
-      fetch(url)
-        .then(res => {
-          if (res.ok) {
-            callback(null, createMessage(true, 'elasticsearch', url));
-          } else {
-            status = false;
-            callback(null, createMessage(false, 'elasticsearch', url, res.statusText));
-          }
-        })
-        .catch(err => {
-          status = false;
-          callback(null, createMessage(false, 'elasticsearch', url, err.message))
-        });
-    }
-  ], function (err, checks) {
-    res.status = 201;
-    res.json({
-      ok: status,
-      checks: checks
+        }
+      });
+      return msg;
+    })
+    .then(msg => {
+      res.status = 201;
+      res.json(msg);
     });
-  });
-
-
 });
 
 module.exports = router;
