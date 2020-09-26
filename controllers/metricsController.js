@@ -1,20 +1,15 @@
-const { keys, toNumber } = require('lodash'),
-  PrometheusQuery = require('prometheus-query'),
-  config = require('config');
+const { keys, omit, toNumber } = require('lodash');
 
 class MetricsControlller {
 
-  constructor() {
-    this.pq = new PrometheusQuery({
-      endpoint: `http://${config.get('prometheus.server')}:${config.get('prometheus.port')}`,
-      baseURL: "/api/v1" // default value
-    });
+  constructor(metricsService) {
+    this.metricsService = metricsService;
   }
 
   getMetrics(request, response, next) {
     var limit = request.query.limit;
 
-    this.pq.metadata(undefined, limit)
+    this.metricsService.findMetrics(limit)
       .then(res => {
         response.json(keys(res));
       })
@@ -24,7 +19,17 @@ class MetricsControlller {
   getMetric(request, response, next) {
     var metric = request.params._metric;
 
-    this.pq.instantQuery(metric)
+    var dimensions = omit(request.query, ['at', 'start', 'end']);
+
+    let query;
+    if (request.query.start || request.query.end) {
+      query = this.metricsService.findMetricByRange(metric, dimensions, request.query.start,
+        request.query.end, request.query.step);
+    } else {
+      query = this.metricsService.findMetricByInstant(metric, dimensions, request.query.at);
+    }
+
+    query
       .then(res => {
         response.json(res.result);
       })
@@ -34,7 +39,7 @@ class MetricsControlller {
   getDimensions(request, response, next) {
     var limit = request.query.limit;
 
-    this.pq.labelNames()
+    this.metricsService.findDimensions()
       .then(res => {
         if (limit && (limit = toNumber(limit))) {
           response.json(res.slice(0, limit));
@@ -49,7 +54,7 @@ class MetricsControlller {
   getDimension(request, response, next) {
     var dimension = request.params._dimension;
 
-    this.pq.labelValues(dimension)
+    this.metricsService.findDimension(dimension)
       .then(res => {
         response.json(res);
       })
@@ -57,4 +62,6 @@ class MetricsControlller {
   }
 }
 
-module.exports = new MetricsControlller();
+module.exports = function (metricsService) {
+  return new MetricsControlller(metricsService);
+};

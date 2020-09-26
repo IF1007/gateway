@@ -2,7 +2,6 @@ const pkg = require('../package.json'),
   router = require('express').Router();
 
 router.use('/metrics', require('./metrics'));
-router.use('/dimensions', require('./dimensions'));
 
 router.use('/health', require('./health'));
 
