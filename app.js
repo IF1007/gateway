@@ -1,4 +1,6 @@
-const app = require('express')()
+const app = require('express')(),
+  { graphqlHTTP } = require('express-graphql'),
+  { schema, root } = require('./graphql');
 
 // handle favicon
 app.use(function (request, response, next) {
@@ -10,8 +12,15 @@ app.use(function (request, response, next) {
   }
 });
 
-//routes
+// routes
 app.use('/', require('./routes'));
+
+// graphql
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: !!process.env.DEBUG
+}));
 
 // error handling
 app.use(function (request, response, next) {
