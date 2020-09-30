@@ -1,6 +1,10 @@
 const app = require('express')(),
+  bodyParser = require('body-parser'),
   { graphqlHTTP } = require('express-graphql'),
   { schema, root } = require('./graphql');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // handle favicon
 app.use(function (request, response, next) {
