@@ -20,6 +20,7 @@ app.use(function (request, response, next) {
 app.use('/', require('./routes'));
 
 // graphql
+// activates graphiql only when the DEBUG env variable is set
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
