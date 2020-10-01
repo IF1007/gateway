@@ -3,6 +3,8 @@ const pkg = require('../package.json'),
 
 router.use('/metrics', require('./metrics'));
 
+router.use('/logs', require('./logs'))
+
 router.use('/health', require('./health'));
 
 router.use('/version', (req, res) => {

@@ -1,6 +1,6 @@
 const { keys, omit, toNumber } = require('lodash');
 
-class MetricsControlller {
+class MetricsController {
 
   constructor(metricsService) {
     this.metricsService = metricsService;
@@ -63,5 +63,5 @@ class MetricsControlller {
 }
 
 module.exports = function (metricsService) {
-  return new MetricsControlller(metricsService);
+  return new MetricsController(metricsService);
 };

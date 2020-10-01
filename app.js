@@ -31,6 +31,7 @@ app.use(function (request, response, next) {
   let err = new Error('Not Found');
   err.status = 404;
 
+  console.log(err)
   next(err);
 });
 app.use(function (err, request, response, next) {
