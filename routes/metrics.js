@@ -4,6 +4,7 @@ const PrometheusService = require('../services/prometheusService');
 const metricsController = require('../controllers/metricsController')(new PrometheusService());
 
 router.get('/', metricsController.getMetrics.bind(metricsController));
+router.post('/', metricsController.customQuery.bind(metricsController));
 router.get('/m/:_metric', metricsController.getMetric.bind(metricsController));
 
 router.get('/ds', metricsController.getDimensions.bind(metricsController));

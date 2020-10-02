@@ -60,6 +60,17 @@ class MetricsController {
       })
       .catch(next);
   }
+
+  customQuery(request, response, next) {
+    let operation = request.body.operation,
+      params = request.body.params;
+
+    this.metricsService.submitCustomQuery(operation, params)
+      .then(res => {
+        response.json(res);
+      })
+      .catch(next);
+  }
 }
 
 module.exports = function (metricsService) {

@@ -1,4 +1,6 @@
 const config = require('config'),
+  fetch = require('node-fetch'),
+  formurlencoded = require('form-urlencoded').default,
   parseISO = require('date-fns/parseISO'),
   PrometheusQuery = require('prometheus-query');
 
@@ -16,10 +18,11 @@ function transformObj(obj) {
 
 class PrometheusService {
   constructor() {
-    this.pq = new PrometheusQuery({
+    this.serviceConfigs = {
       endpoint: `http://${config.get('prometheus.server')}:${config.get('prometheus.port')}`,
       baseURL: "/api/v1" // default value
-    });
+    };
+    this.pq = new PrometheusQuery(this.serviceConfigs);
   }
 
   findMetrics(limit) {
@@ -64,6 +67,30 @@ class PrometheusService {
 
   findDimension(dimension) {
     return this.pq.labelValues(dimension);
+  }
+
+  submitCustomQuery(operation, params) {
+    let url = this.serviceConfigs.endpoint + this.serviceConfigs.baseURL;
+
+    switch (operation) {
+      case 'instantQuery':
+      case 'instant_query':
+        url += '/query';
+        break;
+      case 'rangeQuery':
+      case 'range_query':
+        url += '/query_range';
+        break;
+      default:
+        return Promise.reject(new Error('operation not supported'));
+    }
+
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formurlencoded(params)
+    })
+      .then(res => res.json());
   }
 }
 
