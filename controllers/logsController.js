@@ -6,8 +6,10 @@ class LogsController {
   
     getLogs(request, response, next) {
       let index = request.query.index;
-  
-      this.elasticsearchService.findLogs(index)
+      let size = request.query.size
+      let substrQuery = request.query.q
+
+      this.elasticsearchService.findLogs(index, size, substrQuery)
       .then(res => {
         response.json(res);
       })

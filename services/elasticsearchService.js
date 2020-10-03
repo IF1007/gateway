@@ -6,9 +6,12 @@ class ElasticsearchService {
     this.endpoint = `${config.get('elastic.server')}:${config.get('elastic.port')}`;
   }
 
-  findLogs(index = '_all') {
+  findLogs(index = '_all', size = 1000, substrQuery=undefined) {
 
-    let fetchUrl = `http://${this.endpoint}/${index}/_search`;
+    let fetchUrl = `http://${this.endpoint}/${index}/_search?size=${size}`;
+    if(substrQuery){
+      fetchUrl += `&q=${substrQuery}`
+    }
 
     let json = (async () => {
       const response = await fetch(fetchUrl);
