@@ -1,7 +1,10 @@
 const app = require('express')(),
   bodyParser = require('body-parser'),
   { graphqlHTTP } = require('express-graphql'),
-  { schema, root } = require('./graphql');
+  config = require('config');
+
+const { schema } =
+  require('prom-graphql')(`http://${config.get('prometheus.server')}:${config.get('prometheus.port')}`);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,7 +26,6 @@ app.use('/', require('./routes'));
 // activates graphiql only when the DEBUG env variable is set
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
   graphiql: !!process.env.DEBUG
 }));
 

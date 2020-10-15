@@ -27,6 +27,7 @@
     "graphql": "^15.3.0",
     "node-fetch": "^2.6.1",
     "lodash": "^4.17.20",
+    "prom-graphql": "git+https://github.com/carloszimm/prom-graphql.git#main",
     "prometheus-query": "^2.1.0",
     "promise.allsettled": "^1.0.2"
   },
