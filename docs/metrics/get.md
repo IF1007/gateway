@@ -90,3 +90,55 @@ Returns an array containing the collected metrics.
   curl -H "Content-Type: application/json" \
   http://localhost:8081/metrics/m/process_start_time_seconds?instance=cadvisor:8080&job=cadvisor
   ```
+**Show Dimensions/Labels**
+----
+Returns an array containing the dimensions/labels available.
+
+* **URL**
+
+  `/metrics/ds`
+
+* **Method:**
+
+  `GET`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content Example:** `["__name__","address","alertmanager"]`
+
+* **Sample Call:**
+
+  ```sh
+  curl -H "Content-Type: application/json" \
+  http://localhost:8081/metrics/ds
+
+**Retrieve Dimensions' Values**
+----
+Returns an array containing the dimensions/labels values that are being used with the current scrapped metrics.
+
+* **URL**
+
+  `/metrics/ds/:dimension_name`
+
+* **Method:**
+
+  `GET`
+
+*  **URL Params**
+
+   **Required:**
+ 
+   `dimension_name=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content Example:** `["00:00:00:00:00:00","02:06:d9:74:19:db","02:42:0f:69:6f:c3"]`
+
+* **Sample Call:**
+
+  ```sh
+  curl -H "Content-Type: application/json" \
+  http://localhost:8081/metrics/ds/address
+  
