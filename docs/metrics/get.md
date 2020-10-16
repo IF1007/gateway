@@ -141,4 +141,4 @@ Returns an array containing the dimensions/labels values that are being used wit
   ```sh
   curl -H "Content-Type: application/json" \
   http://localhost:8081/metrics/ds/address
-  
+  ```
