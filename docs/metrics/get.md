@@ -28,7 +28,8 @@ Returns an array containing the collected metrics.
 
 * **URL**
 
-  `/metrics/m/:metric`
+  `/metrics/m/:metric`<br>
+  `/metrics/metric/:metric`
 
 * **Method:**
 
@@ -96,7 +97,8 @@ Returns an array containing the dimensions/labels available.
 
 * **URL**
 
-  `/metrics/ds`
+  `/metrics/ds`<br>
+  `/metrics/dimensions`
 
 * **Method:**
 
@@ -119,7 +121,8 @@ Returns an array containing the dimensions/labels values that are being used wit
 
 * **URL**
 
-  `/metrics/ds/:dimension_name`
+  `/metrics/ds/:dimension_name`<br>
+  `/metrics/dimensions/:dimension_name`
 
 * **Method:**
 
