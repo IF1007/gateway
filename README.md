@@ -2,6 +2,17 @@
 ![Language: JavaScript](https://img.shields.io/static/v1?label=language&message=javascript&color=yellow&style=flat)
 [![License: MIT](https://img.shields.io/github/license/microobs/gateway)](https://opensource.org/licenses/MIT)
 
+
+According to Richardson(2019), an API gateway may implement the following functionalities:
+* Routing/composition
+* Authentication/Authorization
+* Rate limiting
+* Caching
+* Metrics collection
+* Request logging
+
+By now, the microobs API gateway supports the firt two concerns.
+
 ## Usage
 Right now, the the gateway image must be manually built. That can be accomplished by running the following commands:
 ```sh
@@ -18,6 +29,7 @@ sudo docker build -t api_gateway .
 * Enhance the endpoints
 * Add other promising technologies like gRPC
 * Improve the auth logic to support database consumption
+* Address the other functionalaties pointed out by Richardson(2019)
 
 ## Contribution
 This module along with the MicroObs project helped the creation of the open source JS module [Prom-GraphQL](https://github.com/carloszimm/prom-graphql) that as long as we know it's the first GraphQL wrapper on the Prometheus REST API.
