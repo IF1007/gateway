@@ -2,7 +2,7 @@
 
 
 ## JWT Basic Authentication
-The gateway supports basic authentication with JWT (JSON Web Token). To enable it or protect the endpoints, an object is available in the config file presenting the following structure
+The gateway supports basic authentication through JWT (JSON Web Token). To "enable" it(protect the endpoints), an object is available in the config file presenting the following structure
 ```yaml
 "auth": {
     "protectedUrls": [],
