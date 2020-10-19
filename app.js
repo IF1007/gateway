@@ -26,7 +26,7 @@ app.use(function (request, response, next) {
   next(err);
 });
 app.use(function (err, request, response, next) {
-  response.status(err.status || 500).json({ err: err.message });
+  response.status(err.status || 500).json({ error: err.message });
 });
 
 // listener
