@@ -64,7 +64,7 @@
 * **Error Response:**
 
   * **Code:** 500 UNKNOWN OPERATION <br />
-    **Content:** `{ err : "operation not supported" }`
+    **Content:** `{ error: "operation not supported" }`
 
 * **Sample Call:**
 
