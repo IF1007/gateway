@@ -4,8 +4,8 @@
 
 
 According to Richardson(2019), an API gateway may implement the following functionalities:
-* Routing/composition
-* Authentication/Authorization
+* **Routing/composition**
+* **Authentication/authorization**
 * Rate limiting
 * Caching
 * Metrics collection
