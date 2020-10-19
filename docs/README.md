@@ -10,10 +10,12 @@ The gateway supports basic authentication with JWT (JSON Web Token). To enable i
   }
 ```
 
-The `protectedUrls` is a string array of the endpoints that must be protected by authetication. For example, to protect the `graphql`, the string `"/graphql"` must be provided in the array. The `tokenSecret` represents the Salt to be used in the encoding process. Once an endpoint is protected, the following error JSON is displaied:
+The `protectedUrls` is a string array of the endpoints that must be protected by authetication. For example, to protect the `graphql`, the string `"/graphql"` must be provided in the array. The `tokenSecret` represents the Salt to be used in the encoding process. Once an endpoint is protected, the following error JSON is displayed with a valid token is informed:
 ```yaml
 {"error": "Forbidden"}
 ```
+> Note: a generated token is valid for 7 days. After that, a new login process must be done.
+
 To access such a protected endpoint, one must first get a token by submitting a JSON informing a valid username and password to the `/login` endpoint:
 ```sh
 curl -H "Content-type: application/json" \
