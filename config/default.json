@@ -8,5 +8,9 @@
     "server": "prometheus",
     "port": "9090",
     "health": "/-/healthy"
+  },
+  "auth": {
+    "protectedUrls": [],
+    "tokenSecret": "microobs"
   }
 }
