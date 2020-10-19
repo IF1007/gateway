@@ -78,7 +78,7 @@ Returns an array containing the collected metrics.
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{"err":"Not Found"}`
+    **Content:** `{"error": "Not Found"}`
 
 * **Sample Call:**
   
