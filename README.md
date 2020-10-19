@@ -4,6 +4,9 @@
 
 
 ## Future Improvements
+* Enhance the endpoints
+* Add other promising technologies like gRPC
+* Improve the auth logic to support database consumption
 
 ## Contribution
 This module along with the MicroObs project helped the creation of the open source JS module [Prom-GraphQL](https://github.com/carloszimm/prom-graphql) that as long as we know it's the first GraphQL wrapper on the Prometheus REST API.
