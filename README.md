@@ -2,6 +2,17 @@
 ![Language: JavaScript](https://img.shields.io/static/v1?label=language&message=javascript&color=yellow&style=flat)
 [![License: MIT](https://img.shields.io/github/license/microobs/gateway)](https://opensource.org/licenses/MIT)
 
+## Usage
+Right now, the the gateway image must be manually built. That can be accomplished by running the following commands:
+```sh
+# clone the gateway repository
+git clone https://github.com/microobs/gateway
+cd gateway
+
+# build the image
+# api_gateway is the tag configured to be used in the microobs docker-compose
+sudo docker build -t api_gateway .
+```
 
 ## Future Improvements
 * Enhance the endpoints
