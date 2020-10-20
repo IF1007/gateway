@@ -8,4 +8,7 @@ Makefile
 docker-compose.yml
 
 # NPM dependencies
-node_modules
+node_modules/
+
+# docs files
+docs/
