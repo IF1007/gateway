@@ -30,7 +30,8 @@
     "lodash": "^4.17.20",
     "prom-graphql": "git+https://github.com/carloszimm/prom-graphql.git#main",
     "prometheus-query": "^2.1.0",
-    "promise.allsettled": "^1.0.2"
+    "promise.allsettled": "^1.0.2",
+    "url-pattern": "^1.0.3"
   },
   "devDependencies": {}
 }

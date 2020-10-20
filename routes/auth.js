@@ -1,21 +1,26 @@
 const config = require('config'),
   isBefore = require('date-fns/isBefore'),
-  jwt = require('jwt-simple');
+  jwt = require('jwt-simple'),
+  UrlPattern = require('url-pattern');
 
 // inserts a slash at the end of the url
 const insertSlash = url => url.replace(/\/?$/, '/');
 
-// verifies if the supplied url is among the urls in the config file
-const testUrls = (protectedUrls, url) =>
-  protectedUrls.some(val =>
-    val === '*' || val === url || insertSlash(val) === insertSlash(url)
-  );
+let protectedUrls = config.get('auth.protectedUrls');
+// transforms each url pattern in a UrlPattern instance
+if (protectedUrls && protectedUrls.length > 0) {
+  protectedUrls = protectedUrls.map(val =>
+    val === '*' ? new UrlPattern(val) : new UrlPattern(insertSlash(val)));
+}
+
+// verifies if the supplied url is among the url path patters in the config file
+const testUrls = url =>
+  protectedUrls.some(pattern => pattern.match(url));
 
 function middlewareAuth(request, response, next) {
-  const protectedUrls = config.get('auth.protectedUrls');
 
   if (protectedUrls && protectedUrls.length > 0) {
-    if (testUrls(protectedUrls, request.originalUrl.replace(/\?.*$/, ''))) {
+    if (testUrls(insertSlash(request.originalUrl.replace(/\?.*$/, '')))) {
       let token = request.headers['x-access-token'];
 
       if (!token) {
