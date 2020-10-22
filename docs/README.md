@@ -18,7 +18,7 @@
 * [Retrive API Version](https://github.com/microobs/gateway/blob/master/docs/check/get.md#retrive-api-version): `GET /check/version`
 
 ## JWT Basic Authentication
-The gateway supports basic authentication through JWT (JSON Web Token). To "enable" it(protect the endpoints), an object is available in the config file presenting the following structure
+The gateway supports basic authentication through JWT (JSON Web Token). To "enable" it (protect the endpoints), an object is available in the config file presenting the following structure
 ```yaml
 "auth": {
     "protectedUrls": [],
