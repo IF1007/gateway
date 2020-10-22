@@ -1,5 +1,21 @@
+## Endpoints
+* [Login](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication): `POST /login`
 
+### Metrics
+* [Show Metrics](https://github.com/microobs/gateway/blob/master/docs/metrics/get.md#show-metrics): `GET /metrics`
+* [Query Specific Metric](https://github.com/microobs/gateway/blob/master/docs/metrics/get.md#query-specific-metric): `GET /metrics/m/:metric`
+* [Show Dimensions/Labels](https://github.com/microobs/gateway/blob/master/docs/metrics/get.md#show-dimensionslabels): `GET /metrics/ds`
+* [Retrieve Dimensions' Values](https://github.com/microobs/gateway/blob/master/docs/metrics/get.md#retrieve-dimensions-values): `GET /metrics/ds/:dimension_name`
 
+* [Execute Custom Queries](https://github.com/microobs/gateway/blob/master/docs/metrics/post.md#execute-custom-queries): `POST /metrics`
+
+### Logs
+
+### GraphQL
+
+### Server Info
+* [Check Health](https://github.com/microobs/gateway/blob/master/docs/check/get.md#check-health): `GET /check/health`
+* [Retrive API Version](https://github.com/microobs/gateway/blob/master/docs/check/get.md#retrive-api-version): `GET /check/version`
 
 ## JWT Basic Authentication
 The gateway supports basic authentication through JWT (JSON Web Token). To "enable" it(protect the endpoints), an object is available in the config file presenting the following structure
