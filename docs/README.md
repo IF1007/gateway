@@ -17,8 +17,11 @@
 * [Check Health](https://github.com/microobs/gateway/blob/master/docs/check/get.md#check-health): `GET /check/health`
 * [Retrive API Version](https://github.com/microobs/gateway/blob/master/docs/check/get.md#retrive-api-version): `GET /check/version`
 
+## Configuration
+The gateway uses the [node-config](https://github.com/lorenwest/node-config) module to load some configuration settings. This modules in turn loads configuration based on some default files that must reside under the /config folder. Thus, this module is configured to load such configs from the [default.json](https://github.com/microobs/gateway/blob/master/config/default.json) file following the structure presented in it. Those configs are used to set basic informations like the url and port of each dependent service and their health endpoint. Also, it carries some config related to authentication (more info [bellow](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication)). As described in the microobs main page, those configuration can be overwriten by using the docker volumes feature (there's even a line commentted in the [docker-compose file](https://github.com/microobs/microobs/blob/master/docker-compose.yml) that show how to do so). Also, since the gateway is being built manually before use, one can directly alter those config in the default.json file.
+
 ## JWT Basic Authentication
-The gateway supports basic authentication through JWT (JSON Web Token). To "enable" it (protect the endpoints), an object is available in the config file presenting the following structure
+The gateway supports basic authentication through JWT (JSON Web Token). To "enable" it (protect the endpoints), an object is available in the [config file](https://github.com/microobs/gateway/blob/master/config/default.json) presenting the following structure
 ```yaml
 "auth": {
     "protectedUrls": [],
