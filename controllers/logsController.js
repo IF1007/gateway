@@ -11,7 +11,7 @@ class LogsController {
 
     this.logsService.findLogs(index, size, substrQuery)
       .then(res => {
-        response.json(res);
+        response.json(res && res.hits && res.hits.hits ? res.hits.hits : res);
       })
       .catch(next);
   }
