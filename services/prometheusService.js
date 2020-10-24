@@ -75,10 +75,12 @@ class PrometheusService {
     switch (operation) {
       case 'instantQuery':
       case 'instant_query':
+      case 'query':
         url += '/query';
         break;
       case 'rangeQuery':
       case 'range_query':
+      case 'query_range':
         url += '/query_range';
         break;
       default:
