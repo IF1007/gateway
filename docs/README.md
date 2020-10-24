@@ -16,6 +16,8 @@
 
 ### Logs
 
+* [Execute Custom Queries](https://github.com/microobs/gateway/blob/master/docs/logs/post.md#execute-custom-queries): `POST /logs`
+
 ### GraphQL
 
 ### Server Info
