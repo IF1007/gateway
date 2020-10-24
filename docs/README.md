@@ -1,3 +1,8 @@
+# Documentation
+* [Endpoints](https://github.com/microobs/gateway/tree/master/docs#endpoints)
+* [Configuration](https://github.com/microobs/gateway/tree/master/docs#configuration)
+* [JWT Basic Authentication](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication)
+
 ## Endpoints
 * [Login](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication): `POST /login`
 
@@ -38,8 +43,8 @@ The `protectedUrls` is a string array of the endpoints that must be protected by
 To access such a protected endpoint, one must first get a token by submitting a JSON informing a valid username and password to the `/login` endpoint:
 ```sh
 curl -H "Content-type: application/json" \
-  -d '{"username": "admin", "password": "admin"}' \
-  http://localhost:8081/login
+-d '{"username": "admin", "password": "admin"}' \
+http://localhost:8081/login
 ```
 > Note: Currently the only valid username and password are admin and admin.
 
