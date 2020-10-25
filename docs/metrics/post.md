@@ -14,7 +14,7 @@
   
   ```yaml
   {
-    "operation": "instantQuery" | "instant_query" | "rangeQuery" | "range_query",
+    "operation": "value",
     params: {
       "param1": "value",
       "param2": "value",
@@ -24,7 +24,9 @@
   ```
    **Required:**
  
-   `operation=[string]` - one of the available options shown above.
+   `operation=[string]` - one of the available options shown bellow:
+   * `instantQuery` | `instant_query` | `query` - a [Prometheus instant query](https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries) 
+   * `rangeQuery` | `range_query` | `query_range` - a [Prometheus range query](https://prometheus.io/docs/prometheus/latest/querying/api/#range-queries)
 
    **Optional:**
  
