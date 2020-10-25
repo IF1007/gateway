@@ -6,21 +6,45 @@ const config = require('config'),
 // inserts a slash at the end of the url
 const insertSlash = url => url.replace(/\/?$/, '/');
 
+const transformPattern =
+  val => val === '*' ? new UrlPattern(val) : new UrlPattern(insertSlash(val));
+
 let protectedUrls = config.get('auth.protectedUrls');
+
 // transforms each url pattern in a UrlPattern instance
 if (protectedUrls && protectedUrls.length > 0) {
-  protectedUrls = protectedUrls.map(val =>
-    val === '*' ? new UrlPattern(val) : new UrlPattern(insertSlash(val)));
+  protectedUrls = protectedUrls.map(val => {
+    if (typeof val === 'string') {
+      return transformPattern(val);
+    } else if (typeof val === 'object' && val.url) {
+      return {
+        url: transformPattern(val.url),
+        method: val.method
+      };
+    }
+  });
 }
 
-// verifies if the supplied url is among the url path patters in the config file
-const testUrls = url =>
-  protectedUrls.some(pattern => pattern.match(url));
+// verifies if the supplied url is among the url path patterns in the config file
+const testUrls = request => {
+  const url = insertSlash(request.originalUrl.replace(/\?.*$/, ''));
+  const method = request.method.toUpperCase();
 
-function middlewareAuth(request, response, next) {
+  return protectedUrls.some(val => {
+    if (val.url) {
+      const result = val.url.match(url);
+      return val.method ?
+        result && (val.method.split(',').some(m => m.toUpperCase() === method)) :
+        result;
+    }
+    return val.match(url);
+  })
+};
+
+function authMiddleware(request, response, next) {
 
   if (protectedUrls && protectedUrls.length > 0) {
-    if (testUrls(insertSlash(request.originalUrl.replace(/\?.*$/, '')))) {
+    if (testUrls(request)) {
       let token = request.headers['x-access-token'];
 
       if (!token) {
@@ -47,4 +71,4 @@ function middlewareAuth(request, response, next) {
   return next();
 }
 
-module.exports = middlewareAuth;
+module.exports = authMiddleware;
