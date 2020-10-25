@@ -2,8 +2,10 @@
 * [Endpoints](https://github.com/microobs/gateway/tree/master/docs#endpoints)
 * [Configuration](https://github.com/microobs/gateway/tree/master/docs#configuration)
 * [JWT Basic Authentication](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication)
+* [Request logging](https://github.com/microobs/gateway/tree/master/docs#request-logging)
 
 ## Endpoints
+### Authentication
 * [Login](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication): `POST /login`
 
 ### Metrics
@@ -58,4 +60,7 @@ curl -H "Content-type: application/json" \
 http://localhost:8081/metrics
 ```
 
-As can be seen, the token must be provided as a message header under the entry `x-access-token'.
+As can be seen, the token must be provided as a message header under the entry `x-access-token`.
+
+## Request Logging
+The request logging functionality is provided by the Express framework ([Debugging Express](https://expressjs.com/en/guide/debugging.html)). To activate it, the `Debug environment variable` must be set to the appropriated value. To include only information about request, this variable can be set to `express:router`. To output a more complete information about the all the functionalities handled by Express, this variable may be set to `express:*`.
