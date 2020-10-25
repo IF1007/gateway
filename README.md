@@ -13,7 +13,7 @@ According to Richardson(2019), an API gateway may implement the following functi
 
 By now, the microobs API gateway supports the three checked concerns.
 
-This module has been developed using the [Node.js](https://nodejs.org/) platform together with the flexible [Express framework](https://expressjs.com/). Trying to bring a different, preferably more flexible, approach, the gateway supports not only the usual REST communication mechanism (a common pattern adopted by various microservices implementations), but also the [GraphQL](https://graphql.org/) query language. GraphQL brings a distinct approach by letting the consumers query exactly what they want, thus avoiding underfetching and overfetching.
+This module has been developed using the [Node.js](https://nodejs.org/) platform together with the flexible [Express framework](https://expressjs.com/). Trying to bring a different, preferably more flexible, approach, the gateway supports not only the usual REST communication mechanism (a common pattern adopted by various microservices implementations), but also the [GraphQL](https://graphql.org/) query language. GraphQL brings a distinct approach by letting the consumers query exactly what they want, thus avoiding underfetching and overfetching. A valuable discussion can be found [here](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/).
 
 ## Usage
 Right now, the the gateway image must be manually built. That can be accomplished by running the following commands:
