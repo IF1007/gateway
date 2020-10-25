@@ -16,12 +16,12 @@ router.use('/logs', middlewareAuth, require('./logs'));
 router.use('/check', middlewareAuth, require('./healthCheck'));
 
 // graphql
-// activates GraphiQL(UI) only when the DEBUG env variable is set
+// activates GraphiQL(UI) only when the GRAPHIQL env variable is set
 router.use('/graphql', middlewareAuth, graphqlHTTP({
   schema: mergeSchemas({
     schemas: [promSchema, elasticSchema]
   }),
-  graphiql: !!process.env.DEBUG
+  graphiql: !!process.env.GRAPHIQL
 }));
 
 module.exports = router;
