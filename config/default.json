@@ -12,5 +12,10 @@
   "auth": {
     "protectedUrls": [],
     "tokenSecret": "microobs"
+  },
+  "redis": {
+    "server": "redis",
+    "port": "6379",
+    "expire": 60
   }
 }
