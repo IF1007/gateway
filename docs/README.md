@@ -3,6 +3,7 @@
 * [Configuration](https://github.com/microobs/gateway/tree/master/docs#configuration)
 * [JWT Basic Authentication](https://github.com/microobs/gateway/tree/master/docs#jwt-basic-authentication)
 * [Request logging](https://github.com/microobs/gateway/tree/master/docs#request-logging)
+* [Activate GraphiQL](https://github.com/microobs/gateway/tree/master/docs#activate-graphiql)
 
 ## Endpoints
 ### Authentication
@@ -85,3 +86,6 @@ As can be seen, the token must be provided as a message header under the entry `
 
 ## Request Logging
 The request logging functionality is provided by the Express framework ([Debugging Express](https://expressjs.com/en/guide/debugging.html)). To activate it, the `Debug environment variable` must be set to the appropriated value. To include only information about request, this variable can be set to `express:router`. To output a more complete information about the all the functionalities handled by Express, this variable may be set to `express:*`.
+
+## Activate GraphiQL
+[GraphiQL](https://github.com/graphql/graphiql) is a graphical user interface that is useful for testing queries. By default, it is disabled in the gateway but may be activated by setting the `GRAPHIQL` environment variable to any value. After activation, the same can be accessed through the GraphQL endpoint `/graphql` in a browser.
