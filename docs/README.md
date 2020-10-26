@@ -38,7 +38,27 @@ The gateway supports basic authentication through JWT (JSON Web Token). To "enab
   }
 ```
 
-The `protectedUrls` is a string array of the endpoints that must be protected by authetication. For example, to protect the `graphql`, the string `"/graphql"` must be provided in the array. The `tokenSecret` represents the Salt to be used in the encoding process. Once an endpoint is protected, the following error JSON is displayed with a valid token is informed:
+The `protectedUrls` is an array containing the endpoints that must be protected by authetication. This array may be filled with either strings or objects. If a string is supplied, the auth mechanism will protect any route that matches such string regardless of the http verb. On the other hand, an object can be supplied that in such case must have both a `url` property, containing the route pattern that must be protected, and a `method` property consisting of a comma separated string of the protected http methods. The following listing shows examples of valid entries for the `protectedUrls` field:
+```yaml
+"auth": {
+    "protectedUrls": [
+      {
+        "url": "/graphql",
+        "method": "GET,POST"
+      },
+      "/metrics",
+      {
+        "/metrics/m/:metricname"
+        "method": "GET"
+      }
+    ],
+    "tokenSecret": "microobs"
+  }
+```
+
+Note that the routes can have patterns like `/metrics/m/:metricname`or even `/metrics/*`(to protect metrics and all endpoints starting with it). This is possible thanks to the amazing library [url-pattern](https://github.com/snd/url-pattern) that is used internally for checking routes' patterns.
+
+The `tokenSecret` represents the Salt to be used in the encoding process. Once an endpoint is protected, the following error JSON is displayed if an invalid token or no token at all is informed:
 ```yaml
 {"error": "Forbidden"}
 ```
