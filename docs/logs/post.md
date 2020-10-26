@@ -34,7 +34,7 @@
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content Example (taken from Prometheus docs):**
+    **Content Example:**
     ```yaml
     {
       "data": {
