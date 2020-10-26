@@ -26,7 +26,7 @@ cd gateway
 # api_gateway is the tag configured to be used in the microobs docker-compose
 sudo docker build -t api_gateway .
 ```
-After that, it can be run together with the other services of the MicroObs project by running `docker-compose up -d` (more details on the [MicroObs main page](https://github.com/microobs/microobs)).
+After that, it can be run together with the other services of the MicroObs project by running `docker-compose up -d` (more details on the [MicroObs main page](https://github.com/microobs/microobs)). The gateway listens at Port `8081`.
 
 ## Documentation
 The complete documentation can be found under the [`/docs`](https://github.com/microobs/gateway/tree/master/docs) folder.
