@@ -7,11 +7,11 @@ According to Richardson(2019), an API gateway may implement the following functi
 * Routing / composition :heavy_check_mark:
 * Authentication / authorization :heavy_check_mark:
 * Request logging :heavy_check_mark:
+* Caching :heavy_check_mark:
 * Rate limiting
-* Caching
 * Metrics collection
 
-By now, the microobs API gateway supports the three checked concerns.
+By now, the microobs API gateway supports the checked concerns.
 
 This module has been developed using the [Node.js](https://nodejs.org/) platform together with the flexible [Express framework](https://expressjs.com/). Trying to bring a different, preferably more flexible, approach, the gateway supports not only the usual REST communication mechanism (a common pattern adopted by various microservices implementations), but also the [GraphQL](https://graphql.org/) query language. GraphQL brings a distinct approach by letting the consumers query exactly what they want, thus avoiding underfetching and overfetching. A valuable discussion can be found [here](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/).
 
@@ -35,7 +35,7 @@ The complete documentation can be found under the [`/docs`](https://github.com/m
 * Enhance the endpoints
 * Add other promising technologies like [gRPC](https://grpc.io/)
 * Improve the auth logic to support database consumption
-* Address the other functionalaties not covered yet like caching
+* Address the other functionalaties not covered yet like rate limiting
 * Evaluate the incorporation of the [circuit breaker pattern](https://microservices.io/patterns/reliability/circuit-breaker.html)
 
 ## Contribution
