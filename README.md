@@ -32,7 +32,7 @@ After that, it can be run together with the other services of the MicroObs proje
 The complete documentation can be found under the [`/docs`](https://github.com/microobs/gateway/tree/master/docs) folder.
 
 ## Future Improvements
-* Enhance the endpoints
+* Continue enhancing the endpoints
 * Add other promising technologies like [gRPC](https://grpc.io/)
 * Improve the auth logic to support database consumption
 * Address the other functionalaties not covered yet like rate limiting
