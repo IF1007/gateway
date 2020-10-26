@@ -21,7 +21,7 @@
 * [Execute Custom Queries](https://github.com/microobs/gateway/blob/master/docs/logs/post.md#execute-custom-queries): `POST /logs`
 
 ### GraphQL
-* [Query GraphQL](https://github.com/microobs/gateway/edit/master/docs/graphql/post.md#query-graphql) (both logs and metrics): `POST /graphql`
+* [Query GraphQL](https://github.com/microobs/gateway/blob/master/docs/graphql/post.md#query-graphql) (both logs and metrics): `POST /graphql`
 
 ### Server Info
 * [Check Health](https://github.com/microobs/gateway/blob/master/docs/check/get.md#check-health): `GET /check/health`
