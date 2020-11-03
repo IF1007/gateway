@@ -1,4 +1,5 @@
-const redis = require("../cache/redis");
+const redis = require("../cache/redis"),
+  debug = require("debug")("gateway:logs");
 
 const { getFromRedis, updateRedis } = redis;
 
@@ -15,16 +16,18 @@ class LogsController {
 
     let cacheKey = String(index) + String(size) + String(substrQuery);
     let cacheValue = await getFromRedis(cacheKey);
-    console.log('cacheValue are:', cacheValue);
+    debug('cacheValue are:' + cacheValue);
 
     if (cacheValue) {
-      console.log('CACHE WORKS!');
-      response.json(cacheValue && cacheValue.hits && cacheValue.hits.hits ? cacheValue.hits.hits : null);
+      debug('CACHE WORKS!');
+      response.json(cacheValue);
     } else {
       this.logsService.findLogs(index, size, substrQuery)
         .then(res => {
-          updateRedis(cacheKey, res);
-          response.json(res && res.hits && res.hits.hits ? res.hits.hits : null);
+          let respValue = res && res.hits && res.hits.hits ? res.hits.hits : null;
+
+          updateRedis(cacheKey, respValue);
+          response.json(respValue);
         })
         .catch(next);
     }

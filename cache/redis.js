@@ -1,11 +1,12 @@
 const redis = require('redis'),
-  config = require('config');
+  config = require('config'),
+  debug = require('debug')('gateway:caching');
 
 const client =
   redis.createClient(config.get('redis.port'), config.get('redis.server'));
 
 client.on("error", function (error) {
-  console.error(error);
+  debug(error);
 });
 
 const getFromRedis = key => {
@@ -14,7 +15,7 @@ const getFromRedis = key => {
       if (err) {
         reject(err);
       } else {
-        console.log("requested cache!")
+        debug("requested cache!")
         resolve(JSON.parse(value));
       }
     });

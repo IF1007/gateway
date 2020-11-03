@@ -23,6 +23,7 @@
     "config": "^3.3.2",
     "body-parser": "^1.19.0",
     "date-fns": "^2.16.1",
+    "debug": "^4.2.0",
     "elastic-graphql": "git+https://github.com/carloszimm/elastic-graphql.git#main",
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",

@@ -1,5 +1,6 @@
 const app = require('express')(),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  debug = require('debug')('gateway:errors');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +23,8 @@ app.use(function (request, response, next) {
   let err = new Error('Not Found');
   err.status = 404;
 
-  console.log(err)
+  //console.log(err);
+  debug(err);
   next(err);
 });
 app.use(function (err, request, response, next) {
