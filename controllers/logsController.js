@@ -1,6 +1,6 @@
 const redis = require("../cache/redis");
 
-const {getFromRedis, updateRedis} = redis
+const { getFromRedis, updateRedis } = redis;
 
 class LogsController {
 
@@ -8,23 +8,23 @@ class LogsController {
     this.logsService = logsService;
   }
 
- async getLogs(request, response, next) {
+  async getLogs(request, response, next) {
     let index = request.query.index;
     let size = request.query.size;
     let substrQuery = request.query.q;
 
-    let cacheKey = String(index)+String(size)+String(substrQuery)
-    let cacheValue = await getFromRedis(cacheKey)
-    console.log('cacheValue are:', cacheValue)
+    let cacheKey = String(index) + String(size) + String(substrQuery);
+    let cacheValue = await getFromRedis(cacheKey);
+    console.log('cacheValue are:', cacheValue);
 
-    if(cacheValue){
-      console.log('CACHE WORKS!')
-      response.json(cacheValue && cacheValue.hits && cacheValue.hits.hits ? cacheValue.hits.hits : cacheValue);
+    if (cacheValue) {
+      console.log('CACHE WORKS!');
+      response.json(cacheValue && cacheValue.hits && cacheValue.hits.hits ? cacheValue.hits.hits : null);
     } else {
       this.logsService.findLogs(index, size, substrQuery)
         .then(res => {
-          updateRedis(cacheKey, res)
-          response.json(res && res.hits && res.hits.hits ? res.hits.hits : res);
+          updateRedis(cacheKey, res);
+          response.json(res && res.hits && res.hits.hits ? res.hits.hits : null);
         })
         .catch(next);
     }
